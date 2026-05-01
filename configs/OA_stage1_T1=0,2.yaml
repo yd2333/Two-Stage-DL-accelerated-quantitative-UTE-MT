@@ -1,0 +1,34 @@
+experiment:
+  experiment_name: knee_acq # change this if want to work on other dataset
+  is_stage2: False # change this if train for stage 2
+  training_device: "0" # no need to change
+  model_name: OA_stage1_T1=02.pth # Name your model
+  visualization_dir: ./mt_results/ # where you want to save for visualzation
+  batch_size: 4 # experiment settings from this
+  epochs: 500 
+  learning_rate: 1e-4
+  in_channel: 4
+  out_channel: 4
+  early_stop_patience: 50
+
+datasets_train:
+  - img_type: MT
+    path: ./data/knee/OA_MT_train_more.mat
+    in: [0, 9] # input channel (0-indexed)
+    out: [4, 5, 7] # output channel (0-indexed)
+
+  - img_type: T1
+    path: ./data/knee/OA_T1_train_more.mat
+    in: [0,2]
+    out: [1]
+
+datasets_test:
+  - img_type: MT
+    path: ./data/knee/OA_MT_test2.mat
+    in: [0, 9]
+    out: [4, 5, 7]
+
+  - img_type: T1
+    path: ./data/knee/OA_T1_test2.mat
+    in: [0,2]
+    out: [1]

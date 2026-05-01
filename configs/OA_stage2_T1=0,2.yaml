@@ -1,0 +1,36 @@
+experiment:
+  experiment_name: knee_acq # change this if want to work on other dataset
+  is_stage2: True
+  training_device: "0" # no need to change
+  model_name: OA_stage2_unet2_stage1_t1=02.pth
+  visualization_dir: ./mt_results/ # where you want to save for visualzation
+  batch_size: 2
+  epochs: 1000
+  learning_rate: 1e-4
+  in_channel: 8
+  out_channel: 6
+  early_stop_patience: 50
+
+datasets_train:
+  - img_type: MT
+    path: ./data/knee/OA_MT_train_more.mat
+    in: [0,4,5,7,9]
+    out: [1,2,3,6,8]
+
+  - img_type: T1
+    path: ./data/knee/OA_T1_train_more.mat
+    in: [0,1,2]
+    out: [3]
+
+datasets_test:
+  - img_type: MT
+    path: ./data/knee/MT_test_slice_4_33.mat
+    in: [0,4,5,7,9]
+    out: [1,2,3,6,8]
+
+  - img_type: T1
+    path: ./data/knee/T1_test_slice_4_33.mat
+    in: [0,1,2]
+    out: [3]
+
+load_stage1_model_path: knee_acq/OA_stage1_T1=02.pth # !!! Need to have this field if running stage2
